@@ -40,7 +40,19 @@ Route::get('/', function () {
 
 //    Comment::factory()->count(3)->create();
 
-        $comments = DB::table('comments')->get();
+//        $comments = DB::table('comments')->get();
+//    $users = DB::table('users')->pluck('email');
+//    $users = DB::table('users')->where('name','Ansley Feest')->first();
+//    $users = DB::table('users')->where('name','Ansley Feest')->value('email');
+//    $users = DB::table('users')->find(1);
+//    $comments = DB::table('comments')->select('content as comment_content')->get();
+//    $comments = DB::table('comments')->select('user_id')->distinct()->get();
+    $comments = DB::table('comments')->count();
+    $comments = DB::table('comments')->max('user_id');
+    $comments = DB::table('comments')->sum('user_id');
+    $comments = DB::table('comments')->where('content','content')->doesntExist();
+
+
         dd($comments);
     return view('welcome');
 });
