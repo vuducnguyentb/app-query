@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,12 @@ Route::get('/', function () {
 //        }
 //    }, 5);
 
-    $users = DB::table('users')->get();
-    $comments = DB::table('comments')->get();
+//    $users = DB::table('users')->get();
+//    $comments = DB::table('comments')->get();
 
-    
+//    Comment::factory()->count(3)->create();
+
+        $comments = DB::table('comments')->get();
+        dd($comments);
     return view('welcome');
 });
