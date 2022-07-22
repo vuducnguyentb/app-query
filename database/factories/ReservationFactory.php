@@ -18,6 +18,7 @@ class ReservationFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1,3),
+            'city_id' => $this->faker->numberBetween(1,2),
             'room_id' => $this->faker->numberBetween(1,10),
             'check_in' => $this->faker->dateTimeBetween('-10 days','now'),
             'check_out' => $this->faker->dateTimeBetween('now','+10 days'),
