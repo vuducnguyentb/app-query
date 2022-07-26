@@ -10,4 +10,13 @@ class Comment extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $guarded = [];
+
+    protected static function booted()
+    {
+        static::retrieved(function($comment){
+        echo $comment->rating;
+        });
+    }
 }
