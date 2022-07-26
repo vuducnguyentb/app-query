@@ -5,22 +5,27 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
-////   DB::table('rooms')->where('id','>',10)->delete();
-//    DB::statement('SET FOREIGN_KEY_CHECKS=0');
-//    DB::table('rooms')->truncate();
-//    DB::statement('SET FOREIGN_KEY_CHECKS=1');
-//
-//    dump();
+//    $result = Comment::all()->toArray();
+//    $result = Comment::all()->toJson();
+//    $comments = Comment::all();
+//    $result = $comments->reject(function($comment){
+//    return $comment->rating <3;
+//    });
+//    $result = $comments->diff($result);
 //    return view('welcome');
 //});
 Route::get('/', function () {
-    $result = Comment::all()->toArray();
-    $result = Comment::all()->toJson();
-    $comments = Comment::all();
-    $result = $comments->reject(function($comment){
-    return $comment->rating <3;
-    });
-    $result = $comments->diff($result);
+    $comment = new Comment();
+    $comment->user_id = 1;
+    $comment->rating = 5;
+    $comment->content = 'comment content';
+    $result=$comment->save();
+
+    $result = Comment::create([
+    'user_id'=>1,
+    'rating'=>5,
+    'content'=>'comment content'
+    ]);
 
     dump($result);
     return view('welcome');
