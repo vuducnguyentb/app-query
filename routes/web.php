@@ -5,23 +5,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
-//    $affected = DB::table('rooms')
-//    ->where('id',1)
-//    ->update(['price'=>222]);
+////   DB::table('rooms')->where('id','>',10)->delete();
+//    DB::statement('SET FOREIGN_KEY_CHECKS=0');
+//    DB::table('rooms')->truncate();
+//    DB::statement('SET FOREIGN_KEY_CHECKS=1');
 //
-//    $affected = DB::table('users')
-//    ->where('id',1)
-//    ->update(['meta->settings->site_language'=>'es']);
-//
-//    dump($affected);
+//    dump();
 //    return view('welcome');
 //});
 Route::get('/', function () {
-//   DB::table('rooms')->where('id','>',10)->delete();
-    DB::statement('SET FOREIGN_KEY_CHECKS=0');
-    DB::table('rooms')->truncate();
-    DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    $result = Comment::all()->toArray();
+    $result = Comment::all()->toJson();
+    $comments = Comment::all();
+    $result = $comments->reject(function($comment){
+    return $comment->rating <3;
+    });
+    $result = $comments->diff($result);
 
-    dump();
+    dump($result);
     return view('welcome');
 });
