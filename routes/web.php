@@ -5,27 +5,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
-//    DB::table('rooms')->insert([
-//        ['room_number' => 1, 'room_size' => 1, 'price' => 1, 'description' => 'new description 1'],
-//    ]);
+//    $affected = DB::table('rooms')
+//    ->where('id',1)
+//    ->update(['price'=>222]);
 //
-//    $id = DB::table('rooms')->insertGetId(
-//        ['room_number' => 3, 'room_size' => 3, 'price' => 3, 'description' => 'new description 3'],
-//    );
+//    $affected = DB::table('users')
+//    ->where('id',1)
+//    ->update(['meta->settings->site_language'=>'es']);
 //
+//    dump($affected);
 //    return view('welcome');
 //});
-
-
 Route::get('/', function () {
-    $affected = DB::table('rooms')
-    ->where('id',1)
-    ->update(['price'=>222]);
+//   DB::table('rooms')->where('id','>',10)->delete();
+    DB::statement('SET FOREIGN_KEY_CHECKS=0');
+    DB::table('rooms')->truncate();
+    DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-    $affected = DB::table('users')
-    ->where('id',1)
-    ->update(['meta->settings->site_language'=>'es']);
-
-    dump($affected);
+    dump();
     return view('welcome');
 });
