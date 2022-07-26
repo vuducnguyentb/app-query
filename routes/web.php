@@ -61,6 +61,18 @@ Route::get('/', function () {
     ->select('name')
     ->union($users)
     ->get();
+
+    $comments = DB::table('comments')
+    ->select('rating as rating_or_room_id','id',DB::raw
+    ('"comments" as type_of_activity'))
+    ->where('user_id',2);
+    $result = DB::table('reservations')
+    ->select('room_id as rating_or_room_id','id',DB::raw
+    ('"reservations" as type_of_activity'))
+    ->union($comments)
+    ->where('user_id',2)
+    ->get();
+
     dump($result);
 
   return view('welcome');
