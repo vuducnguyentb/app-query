@@ -5,75 +5,37 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
-////    $result = DB::table('reservations')
-////    ->join('rooms','reservations.room_id','=','rooms.id')
-////    ->join('users','reservations.user_id','=','users.id')
-////    ->where('rooms.id','>',3)
-////    ->get();
-////
-////    $result = DB::table('reservations')
-////    ->join('rooms',function ($join){
-////        $join->on('reservations.room_id','=','rooms.id')
-////        ->where('rooms.id','>',3);
-////    })
-////        ->join('users',function ($join){
-////            $join->on('reservations.user_id','=','users.id')
-////                ->where('users.id','>',1);
-////    })
-////    ->get();
-////    $rooms = DB::table('rooms')->where('id', '>', 3);
-////    $users = DB::table('users')->where('id', '>', 1);
-////    $result = DB::table('reservations')
-////        ->joinSub($rooms, 'rooms', function ($join) {
-////            $join->on('reservations.room_id', '=', 'rooms.id');
-////        })
-////        ->joinSub($users, 'users', function ($join) {
-////            $join->on('reservations.user_id', '=', 'users.id');
-////        })
-////        ->get();
-//    $result = DB::table('rooms')
-//        ->leftJoin('reservations', 'rooms.id', '=', 'reservations.room_id')
-//        ->leftJoin('cities', 'reservations.city_id', '=', 'cities.id')
-//        ->selectRaw('room_size,cities.name,count(reservations.id) as reservations_count')
-//        ->groupBy('room_size', 'cities.name')
-//        ->orderByRaw('count(reservations.id) DESC')
-//        ->get();
-//    $result = DB::table('rooms')
-//        ->crossJoin('cities')
-//        ->get();
-//    $result = DB::table('rooms')
-//        ->crossJoin('cities')
-//        ->leftJoin('reservations', function ($join) {
-//            $join->on('rooms.id', '=', 'reservations.room_id')
-//                ->on('cities.id', '=', 'reservations.city_id');
-//        })
-//        ->selectRaw('count(reservations.id) as reservations_count, room_size, cities.name')
-//        ->groupBy('room_size','cities.name')
-//        ->orderByRaw('rooms.room_size DESC')
-//        ->get();
+//    $users = DB::table('users')
+//    ->select('name');
 //
+//    $result = DB::table('cities')
+//    ->select('name')
+//    ->union($users)
+//    ->get();
+//
+//    $comments = DB::table('comments')
+//    ->select('rating as rating_or_room_id','id',DB::raw
+//    ('"comments" as type_of_activity'))
+//    ->where('user_id',2);
+//    $result = DB::table('reservations')
+//    ->select('room_id as rating_or_room_id','id',DB::raw
+//    ('"reservations" as type_of_activity'))
+//    ->union($comments)
+//    ->where('user_id',2)
+//    ->get();
+//
+//  return view('welcome');
 //});
+
 Route::get('/', function () {
-    $users = DB::table('users')
-    ->select('name');
+    DB::table('rooms')->insert([
+        ['room_number' => 1, 'room_size' => 1, 'price' => 1, 'description' => 'new description 1'],
+    ]);
 
-    $result = DB::table('cities')
-    ->select('name')
-    ->union($users)
-    ->get();
+    $id = DB::table('rooms')->insertGetId(
+        ['room_number' => 3, 'room_size' => 3, 'price' => 3, 'description' => 'new description 3'],
+    );
 
-    $comments = DB::table('comments')
-    ->select('rating as rating_or_room_id','id',DB::raw
-    ('"comments" as type_of_activity'))
-    ->where('user_id',2);
-    $result = DB::table('reservations')
-    ->select('room_id as rating_or_room_id','id',DB::raw
-    ('"reservations" as type_of_activity'))
-    ->union($comments)
-    ->where('user_id',2)
-    ->get();
-
-    dump($result);
-
-  return view('welcome');
+    dump($id);
+    return view('welcome');
 });
