@@ -19,4 +19,15 @@ class Comment extends Model
         echo $comment->rating;
         });
     }
+
+    //change Rating
+    public function getRatingAttribute($value)
+    {
+        return $value + 10;
+    }
+
+    public function getWhoWhatAttribute()
+    {
+        return "user {$this->user_id} rates {$this->rating}";
+    }
 }
