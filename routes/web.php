@@ -5,13 +5,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
-//    $result = Comment::all();
-//    dump($result);
+//    $result = Comment::find(1);
+//    dump($result->who_what);
+////    dump($result->rating);
 //    return view('welcome');
 //});
 Route::get('/', function () {
     $result = Comment::find(1);
-    dump($result->who_what);
-//    dump($result->rating);
+    $result->rating = 4;
+    $result->save();
+
+    dump($result->rating);
     return view('welcome');
 });
