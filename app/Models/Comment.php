@@ -35,4 +35,9 @@ class Comment extends Model
     {
         $this->attributes['rating'] = $value + 1;
     }
+
+    public function user()
+    {
+       return $this->belongsTo(User::class,'user_id','id');
+    }
 }

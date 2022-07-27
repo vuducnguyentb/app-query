@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $result = Address::find(1);
+    $result = Comment::find(1);
     dump($result->user->name);
 
     return view('welcome');
