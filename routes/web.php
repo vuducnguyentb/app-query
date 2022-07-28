@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-//    $result = Comment::find(6);
-//    dump($result->country->name);
-//        $result = Company::find(2);
-//        dump($result->reservations);
-    $result = User::find(3);
-    dump($result->image);
+//    $result = User::find(3);
+//    dump($result->image);
+        $result = Room::find(10);
+        dump($result->comments);
+
     return view('welcome');
 });

@@ -14,4 +14,8 @@ class Room extends Model
         return $this->belongsToMany(City::class)
             ->withPivot('created_at','updated_at');
     }
+    public function comments()
+    {
+        return $this->morphMany('App\Models\Comment','commentable');
+    }
 }

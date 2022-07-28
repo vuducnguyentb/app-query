@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->text('content')->nullable(false);
             $table->integer('rating')->nullable();
+            $table->string('commentable_type');
+            $table->integer('commentable_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

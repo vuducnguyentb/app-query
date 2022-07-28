@@ -12,4 +12,9 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Models\Comment','commentable');
+    }
 }
