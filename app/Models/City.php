@@ -15,4 +15,9 @@ class City extends Model
             ->withPivot('created_at','updated_at');
             //wherePivot() wherePivotNotIn() or wherePivotIn('piority',[1,2])
     }
+
+    public function image()
+    {
+        return $this->morphOne('App\Models\Image','imageable');
+    }
 }

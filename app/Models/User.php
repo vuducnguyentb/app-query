@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class,'user_id','id');
     }
+
+    public function image()
+    {
+        return $this->morphOne('App\Models\Image','imageable');
+    }
 }
