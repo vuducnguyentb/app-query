@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 //    $result = User::find(3);
 //    dump($result->image);
-        $result = Room::find(10);
-        dump($result->comments);
-
+//        $result = Room::find(10);
+//        dump($result->comments);
+    $result = User::find(1);
+    dump($result->likedImages);
     return view('welcome');
 });

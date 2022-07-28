@@ -18,4 +18,9 @@ class Room extends Model
     {
         return $this->morphMany('App\Models\Comment','commentable');
     }
+
+    public function likes()
+    {
+        return $this->morphMany('App\Models\User','likeable');
+    }
 }
